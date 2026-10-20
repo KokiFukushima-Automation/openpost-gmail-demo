@@ -65,3 +65,9 @@ npm run build
 npm run lint
 npm test
 ```
+
+## ライセンス
+
+独自コードは[MIT License](LICENSE)です。公開コードを利用・改造できます。
+同梱のhtmx 2.0.4には[Zero-Clause BSD](third-party/htmx-LICENSE.txt)が適用されます。
+その他の依存パッケージは各パッケージのライセンスに従います。
