@@ -1,0 +1,15 @@
+node_modules
+dist
+data/*
+!data/ranges/
+!data/ranges/**
+out
+coverage
+.git
+tests
+docs/reports
+*.db
+*.db-wal
+*.db-shm
+.env
+.env.local

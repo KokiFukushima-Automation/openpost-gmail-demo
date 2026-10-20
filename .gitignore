@@ -1,0 +1,26 @@
+node_modules/
+dist/
+out/
+*.db
+*.db-wal
+*.db-shm
+.env
+.env.local
+coverage/
+*.log
+.DS_Store
+
+# Playwright (Phase 3 e2e) - traces/reports are scratch output, never committed; screenshots under
+# docs/reports/screenshots/ are the exception and are committed deliberately.
+/test-results/
+/playwright-report/
+/blob-report/
+
+# Phase 1 default DB_PATH lives under ./data/, but data/ranges/*.cidr (Phase 2 shipped CIDR data)
+# must stay committed - see docs/05_phase2_spec.md §4.1.
+/data/*
+!/data/ranges/
+
+# Private deployment environment and state (never published in note).
+.env.*.local
+/cloud-local/

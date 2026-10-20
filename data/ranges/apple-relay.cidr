@@ -1,0 +1,9 @@
+# openpost-range-list: 1
+# name: apple_relay
+# source: https://mask-api.icloud.com/egress-ip-ranges.csv
+# generated_at: 2026-09-15T00:00:00Z
+# entries: 4
+17.0.0.0/8
+172.224.0.0/12
+2a01:b740::/32
+2403:300::/32

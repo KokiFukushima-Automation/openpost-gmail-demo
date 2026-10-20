@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "openpost — Gmail開封シグナル",
+  "version": "0.1.1",
+  "minimum_chrome_version": "120",
+  "description": "openpostで追跡したメールの状態をGmailに表示します。本文の読了を保証するものではありません。",
+  "permissions": [
+    "storage"
+  ],
+  "optional_host_permissions": [
+    "https://*/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "options_page": "options.html",
+  "action": {
+    "default_title": "openpostの接続設定"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "matcher.js"
+      ],
+      "matches": [
+        "https://mail.google.com/*"
+      ]
+    }
+  ]
+}

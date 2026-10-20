@@ -1,0 +1,14 @@
+.git
+node_modules
+dist
+out
+coverage
+test-results
+playwright-report
+docs/reports
+.env*
+*.db
+*.sqlite
+*.log
+*.key
+cloud-local/

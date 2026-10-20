@@ -1,0 +1,25 @@
+{
+  "name": "openpost",
+  "short_name": "openpost",
+  "id": "/dashboard/",
+  "scope": "/dashboard/",
+  "start_url": "/dashboard/messages",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "theme_color": "#1b5fbf",
+  "icons": [
+    { "src": "/dashboard/assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/dashboard/assets/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/dashboard/assets/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "share_target": {
+    "action": "/dashboard/compose",
+    "method": "GET",
+    "params": { "title": "subject", "text": "body", "url": "shared_url" }
+  },
+  "shortcuts": [
+    { "name": "Compose", "url": "/dashboard/compose" },
+    { "name": "Messages", "url": "/dashboard/messages" }
+  ]
+}

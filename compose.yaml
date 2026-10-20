@@ -1,0 +1,16 @@
+services:
+  openpost:
+    build: .
+    image: openpost:latest
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - openpost-data:/data
+    ports:
+      # Loopback-published by default - the tunnel (`openpost tunnel`) is the exposure story, not
+      # a directly-published container port. Change to "8787:8787" only if you understand the
+      # BIND_ADDRESS=0.0.0.0 + API_TOKEN requirement documented in docs/deploy.md.
+      - "127.0.0.1:8787:8787"
+
+volumes:
+  openpost-data:

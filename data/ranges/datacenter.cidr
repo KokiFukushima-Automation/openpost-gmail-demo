@@ -1,0 +1,16 @@
+# openpost-range-list: 1
+# name: datacenter
+# source: manual (hand-curated AWS/GCP/Azure/DigitalOcean egress samples; reinforces click-scanner
+#   detection only - see docs/05_phase2_spec.md §4.1). The two GCP prefixes below moved here from
+#   google-proxy.cidr in the Phase 2.1 hardening pass (finding #3): they are general GCP address
+#   space pulled from goog.json, not Gmail's own image-proxy egress, so they must not grant the R3
+#   "this is a Gmail proxy fetch" credit - see docs/05_phase2_spec.md's Phase 2.1 amendments.
+# generated_at: 2026-09-15T00:00:00Z
+# entries: 7
+104.131.0.0/16
+138.68.0.0/16
+20.0.0.0/8
+3.0.0.0/9
+34.64.0.0/10
+35.190.0.0/17
+35.192.0.0/12

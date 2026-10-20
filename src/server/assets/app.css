@@ -1,0 +1,307 @@
+/* openpost dashboard styles - vendored, no build step. Every visual state is text/shape first;
+   colour is decoration only (WCAG 1.4.1). Dark mode via prefers-color-scheme; contrast targets
+   >= 4.5:1 in both. */
+
+:root {
+  --bg: #ffffff;
+  --fg: #14181f;
+  --muted: #5a6472;
+  --border: #d7dde5;
+  --accent: #1b5fbf;
+  --accent-fg: #ffffff;
+  --danger: #b3261e;
+  --danger-bg: #fdecea;
+  --info-bg: #eaf1fc;
+  --focus: #1b5fbf;
+  --row-hover: #f3f6fa;
+  --flash-bg: #fff8db;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #10141a;
+    --fg: #eef1f5;
+    --muted: #a7b0bd;
+    --border: #2b333e;
+    --accent: #7fb0ff;
+    --accent-fg: #0b1220;
+    --danger: #ff8a80;
+    --danger-bg: #3a1f1d;
+    --info-bg: #16273f;
+    --focus: #7fb0ff;
+    --row-hover: #1a2029;
+    --flash-bg: #3a331a;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--accent);
+  color: var(--accent-fg);
+  padding: 0.5em 1em;
+  z-index: 10;
+}
+.skip-link:focus {
+  left: 0.5em;
+  top: 0.5em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+a { color: var(--accent); }
+
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+  padding: 0.75em 1.25em;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.site-header .brand { font-weight: 700; margin: 0; }
+.site-header nav ul { list-style: none; display: flex; gap: 1em; margin: 0; padding: 0; flex-wrap: wrap; }
+.site-header nav a[aria-current="page"] { font-weight: 700; text-decoration: underline; }
+#live-status { margin-left: auto; color: var(--muted); font-size: 0.9em; }
+
+main { max-width: 1100px; margin: 0 auto; padding: 1.25em; }
+
+h1 { font-size: 1.5em; margin-top: 0; }
+h2 { font-size: 1.15em; }
+
+.site-footer { text-align: center; color: var(--muted); padding: 2em 1em; font-size: 0.85em; }
+
+table { width: 100%; border-collapse: collapse; margin: 1em 0; }
+th, td { text-align: left; padding: 0.5em 0.6em; border-bottom: 1px solid var(--border); }
+th[scope="col"] { font-weight: 700; }
+tbody tr:hover { background: var(--row-hover); }
+tr.flash { animation: flash-highlight 1.2s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  tr.flash { animation: none; background: var(--info-bg); }
+}
+@keyframes flash-highlight {
+  from { background: var(--info-bg); }
+  to { background: transparent; }
+}
+
+.filter-form summary { cursor: pointer; font-weight: 700; padding: 0.4em 0; }
+/* Phase 5 (§3.3): filter-form is a server-rendered <details> so it collapses below 860px with zero
+   JS; above that width it is forced open (the native disclosure toggle is a mobile-only affordance,
+   not a desktop regression). */
+@media (min-width: 861px) {
+  .filter-form summary { display: none; }
+  .filter-form form { display: block !important; }
+}
+.filter-form fieldset { border: 1px solid var(--border); border-radius: 6px; padding: 1em; margin: 0 0 1em; }
+.filter-form legend { padding: 0 0.4em; font-weight: 700; }
+.filter-form .field { display: inline-flex; flex-direction: column; margin: 0 1em 0.75em 0; }
+.filter-form label { font-size: 0.85em; color: var(--muted); margin-bottom: 0.25em; }
+input, select, button {
+  font: inherit;
+  padding: 0.4em 0.6em;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--fg);
+}
+button {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-color: var(--accent);
+  cursor: pointer;
+}
+button.btn-override { margin: 0.15em; }
+
+.badge { display: inline-flex; align-items: center; gap: 0.35em; padding: 0.15em 0.5em; border-radius: 999px; border: 1px solid var(--border); font-size: 0.9em; }
+.badge-replied { border-color: var(--accent); }
+.badge-read_confirmed { font-weight: 600; }
+
+.confidence meter { width: 6em; vertical-align: middle; }
+
+.rule-chip { border: 1px solid var(--border); border-radius: 4px; padding: 0.05em 0.4em; margin-right: 0.2em; font-size: 0.85em; }
+
+.pager { display: flex; gap: 1em; align-items: center; margin: 1em 0; }
+
+.flash { padding: 0.6em 1em; border-radius: 6px; background: var(--flash-bg); }
+.flash-error { background: var(--danger-bg); color: var(--danger); }
+
+.chart-svg { width: 100%; height: auto; max-width: 480px; }
+.chart-bar .bar { fill: var(--accent); }
+.chart-bar .bar-label { fill: var(--muted); font-size: 9px; }
+.spark-line { fill: none; stroke: var(--accent); stroke-width: 2; }
+.chart-data table { font-size: 0.9em; }
+.chart-empty { color: var(--muted); }
+
+.stat-tiles { display: flex; flex-wrap: wrap; gap: 1em; margin: 1em 0; }
+.stat-tile { border: 1px solid var(--border); border-radius: 8px; padding: 0.75em 1em; min-width: 8em; }
+.stat-tile .stat-label { display: block; font-size: 0.8em; color: var(--muted); }
+.stat-tile .stat-value { display: block; font-size: 1.4em; font-weight: 700; }
+.stat-tile .stat-sub { display: block; font-size: 0.8em; color: var(--muted); }
+
+.timeline { list-style: none; padding: 0; margin: 0; }
+.timeline li { border-left: 2px solid var(--border); padding: 0.5em 0 0.5em 1em; margin-bottom: 0.25em; }
+
+.note { color: var(--muted); }
+
+.recipient-detail { margin-bottom: 2em; padding-top: 1em; border-top: 1px solid var(--border); }
+
+/* Phase 4: campaigns */
+.inline-form { display: inline-block; margin: 0 0.5em 0 0; }
+.campaign-actions { display: flex; gap: 0.5em; }
+.chart-progress .chart-svg { width: 100%; max-width: 100%; border-radius: 4px; overflow: hidden; }
+.progress-sent { fill: var(--accent); }
+.progress-skipped { fill: var(--muted); }
+.progress-failed { fill: var(--danger); }
+.progress-pending { fill: var(--border); }
+.badge-running, .badge-sent { border-color: var(--accent); color: var(--accent); }
+.badge-failed, .badge-cancelled { border-color: var(--danger); color: var(--danger); }
+.badge-completed { font-weight: 600; }
+
+/* ---------------------------------------------------------------------------------------------
+   Phase 5 (docs/09_phase5_spec.md §3): responsive pass. Replaces the single Phase-3
+   `@media (max-width: 700px)` block above with the two breakpoints below.
+   >860px (desktop): unchanged from everything above this comment.
+   481-860px (tablet): single column, tables kept but horizontally scrollable in `.table-wrap`.
+   <=480px (phone): tables -> cards, bottom nav, 16px base font (prevents iOS zoom-on-focus).
+   --------------------------------------------------------------------------------------------- */
+
+.table-wrap { width: 100%; }
+
+@media (max-width: 860px) {
+  .site-header { flex-direction: column; align-items: flex-start; gap: 0.5em; }
+  .site-header nav { display: none; } /* replaced by .nav-bottom below */
+  body { padding-bottom: 4.5rem; }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  main { padding: 0.75em; }
+}
+
+@media (min-width: 481px) and (max-width: 860px) {
+  .filter-form { margin-bottom: 1em; }
+}
+
+@media (max-width: 480px) {
+  html { font-size: 16px; } /* prevents iOS Safari zooming the page on input focus */
+  main { padding: 0.75em; }
+
+  .table-wrap table,
+  .table-wrap thead,
+  .table-wrap tbody,
+  .table-wrap th,
+  .table-wrap td,
+  .table-wrap tr { display: block; }
+  .table-wrap thead {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+  .table-wrap tr { border: 1px solid var(--border); border-radius: 8px; padding: 0.6em 0.8em; margin-bottom: 0.6em; }
+  .table-wrap td {
+    border: 0; padding: 0.15em 0; display: flex; gap: 0.75em; justify-content: space-between;
+    align-items: baseline; text-align: right;
+  }
+  .table-wrap td::before { content: attr(data-label); color: var(--muted); font-size: 0.8em; text-align: left; }
+  .table-wrap td:empty { display: none; }
+
+  input, select, button, textarea { font-size: 16px; min-height: 44px; }
+  input[type="checkbox"], input[type="radio"] { min-width: 44px; }
+  button { touch-action: manipulation; }
+  /* DoD 2 / test 438: every interactive control gets at least a 44x44 hit area. Negative margin
+     compensates the added padding so the visual layout barely shifts - this is a hit-area
+     expansion, not a visual redesign. */
+  a {
+    display: inline-block;
+    box-sizing: border-box;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.65em 0.5em;
+    margin: -0.65em -0.5em;
+    text-align: center;
+  }
+  button.btn-override { min-width: 44px; margin: 0.2em; }
+  .stat-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75em; }
+  .stat-tile { min-width: 0; }
+  .chart-svg { max-width: 100%; }
+  .campaign-actions { flex-direction: column; }
+  .campaign-actions form, .campaign-actions button { width: 100%; }
+  .pager a, .pager span { display: inline-flex; align-items: center; min-height: 44px; }
+}
+
+/* Bottom navigation (<=860px): a fixed tab bar with six items, replacing the header nav. Icons are
+   inline SVG glyphs (src/server/views/icons.ts) - no icon font, no extra request. */
+.nav-bottom {
+  display: none;
+}
+@media (max-width: 860px) {
+  .nav-bottom {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 5;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .nav-bottom a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.15em;
+    min-height: 48px;
+    padding: 0.35em 0.2em;
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 0.7em;
+  }
+  .nav-bottom a svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+  .nav-bottom a[aria-current="page"] { font-weight: 700; border-top: 2px solid var(--accent); margin-top: -1px; }
+}
+
+/* Phase 5: compose page (§2.2) */
+.compose-form { display: flex; flex-direction: column; gap: 0.9em; max-width: 640px; }
+.compose-form .field { display: flex; flex-direction: column; gap: 0.3em; }
+.compose-form label { font-weight: 600; }
+.compose-form textarea { min-height: 12em; resize: vertical; }
+.compose-extra summary { cursor: pointer; font-weight: 600; margin-bottom: 0.5em; }
+.btn-primary { font-weight: 700; }
+.btn-send { padding: 0.7em 1.2em; }
+@media (max-width: 480px) {
+  .btn-send { width: 100%; min-height: 48px; }
+}
+.compose-transport-note { color: var(--muted); font-size: 0.9em; }
+.flash-info { background: var(--info-bg); border-radius: 6px; padding: 0.5em 0.8em; }
+.draft-restore-banner { background: var(--info-bg); border-radius: 6px; padding: 0.5em 0.8em; display: flex; justify-content: space-between; gap: 1em; align-items: center; }
+
+/* Phase 5: settings page push devices */
+.push-devices-table td, .push-devices-table th { vertical-align: top; }
+.offline-page { max-width: 480px; margin: 3em auto; padding: 1em; text-align: center; }
+.push-actions { display: flex; gap: 0.75em; flex-wrap: wrap; margin: 1em 0; }
+.install-help { border: 1px solid var(--border); border-radius: 8px; padding: 1em; margin: 1em 0; }
+

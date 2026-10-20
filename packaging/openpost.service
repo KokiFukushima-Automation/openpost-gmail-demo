@@ -1,0 +1,29 @@
+[Unit]
+Description=openpost tracking server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=openpost
+Group=openpost
+WorkingDirectory=/var/lib/openpost
+EnvironmentFile=/etc/openpost/openpost.env
+ExecStart=/usr/bin/node /opt/openpost/dist/cli/index.js serve
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=true
+LockPersonality=true
+ReadWritePaths=/var/lib/openpost
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+# openpost-range-list: 1
+# name: google_proxy
+# source: https://www.gstatic.com/ipranges/goog.json (filtered to known Gmail image-proxy egress
+#   prefixes only - see docs/05_phase2_spec.md's Phase 2.1 amendments; the rest of goog.json is
+#   general GCP address space and lives in datacenter.cidr instead)
+# generated_at: 2026-09-15T00:00:00Z
+# entries: 4
+2001:4860::/32
+64.233.160.0/19
+66.102.0.0/20
+66.249.64.0/19

@@ -1,0 +1,10 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>openpost 接続設定</title><link rel="stylesheet" href="options.css"></head><body><main>
+<h1>Gmailに開封シグナルを表示</h1>
+<p>openpostで追跡し、GmailスレッドIDが登録されたメールが対象です。過去の未追跡メールには対応しません。本文を読んだことや全員の既読は保証できません。</p>
+<p>送信するのは表示中のスレッドIDです。宛先・件名・本文は読み取りません。接続先はご自身が管理するopenpostに限定してください。</p>
+<form id="connect"><label>サーバーURL<input id="origin" type="url" placeholder="https://track.example.com" required></label><label>API_TOKEN<input id="token" type="password" autocomplete="off" minlength="16" required></label>
+<label><input id="remember" type="checkbox">ブラウザ終了後もトークンを保存する（この端末のみ）</label>
+<button type="submit">接続して保存</button> <button id="disconnect" type="button">接続を解除</button></form>
+<p id="status" role="status"></p><p>サーバー側でAPI_TOKENを設定し、必要ならAPI_CORS_ORIGINSに次の値を指定します。</p><code id="extension-origin"></code>
+<p>設定変更後はGmailを再読み込みしてください。トークンは通常ブラウザ終了時に消去されます。</p>
+</main><script type="module" src="options.js"></script></body></html>
